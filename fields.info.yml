@@ -1,0 +1,5 @@
+name: 'Fields'
+type: module
+description: 'A custom module for handling fields'
+package: Custom
+core_version_requirement: ^10

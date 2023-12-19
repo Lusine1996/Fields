@@ -1,0 +1,42 @@
+<?php
+
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function fields_entity_base_field_info(EntityTypeInterface $entity_type)
+{
+  $fields = [];
+
+  if ($entity_type->id() === 'comment') {
+// Define a base field for the Comment entity type.
+    $fields['my_custom_field'] = BaseFieldDefinition::create('text')
+      ->setLabel(t('My Custom Field'))
+      ->setDescription(t('Description of my custom field'))
+      ->setSettings([
+        'max_length' => 255,
+        'text_processing' => 0,
+      ])
+      ->setDefaultValue('')
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'string',
+        'weight' => -4,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'string_textfield',
+        'weight' => -4,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+// Add more fields as needed.
+// ...
+
+    return $fields;
+  }
+
+  return [];
+}
